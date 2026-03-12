@@ -24,14 +24,38 @@
         <h3>
             ... deployed onto Azure with GitHub Actions
         </h3>
+        <p th:text="${message}"></p>
     </div>
 
     <br>
     <div style="text-align: center;">
         <img class="img-fluid" src="https://swimburger.net/media/ppnn3pcl/azure.png" style="width: 10%"/>
-        <img class="img-fluid"src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/169px-Heart_coraz%C3%B3n.svg.png" style="width: 10%">
-        <img class="img-fluid"src="https://raw.githubusercontent.com/JasonFreeberg/my-spring-app/master/src/main/resources/static/GitHub-Mark-120px-plus.png" style="width: 10%">
+        <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/169px-Heart_coraz%C3%B3n.svg.png" style="width: 10%">
+        <img class="img-fluid" src="https://raw.githubusercontent.com/JasonFreeberg/my-spring-app/master/src/main/resources/static/GitHub-Mark-120px-plus.png" style="width: 10%">
     </div>
+
+    <hr>
+
+    <h2>Task Manager</h2>
+
+    <!-- Add task form -->
+    <form method="post" action="/" class="form-inline mb-3">
+        <input type="text" name="task" class="form-control mr-2" placeholder="New task..." required/>
+        <button type="submit" class="btn btn-primary">Add Task</button>
+    </form>
+
+    <!-- Filter box -->
+    <form method="get" action="/" class="form-inline mb-3">
+        <input type="text" name="filter" th:value="${filter}" class="form-control mr-2" placeholder="Filter tasks..."/>
+        <button type="submit" class="btn btn-secondary">Filter</button>
+        <a href="/" class="btn btn-link ml-2">Clear</a>
+    </form>
+
+    <!-- Task list -->
+    <ul class="list-group">
+        <li th:each="task : ${tasks}" th:text="${task}" class="list-group-item"></li>
+        <li th:if="${#lists.isEmpty(tasks)}" class="list-group-item text-muted">No tasks found.</li>
+    </ul>
 
 </main>
 <!-- /.container -->
